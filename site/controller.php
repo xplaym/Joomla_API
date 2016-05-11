@@ -403,5 +403,40 @@ class hoicoiapiController extends JControllerLegacy {
         }
         return $output;
     }
+	
+	// http://YOURSITE.COM/index.php?option=com_hoicoiapi&task=mosets
+	public function mosets(){
+		
+		$id = JRequest::getInt('id',1);
+		$return_arr = array();
+		$query = "SELECT link_id,link_name,link_published,address,city,state,country,postcode,telephone,fax,email,website,lat,lng,link_rating FROM `#__mt_links` WHERE lat is not null and lat != '255.000000' and link_published = '1'";
+
+		$db = &JFactory::getDBO(); 
+		$db->setQuery($query);
+		$row = $db->loadRowList();
+
+		foreach ($row as $key => $value) {
+			$row_array['link_id'] = $value[0];
+			$row_array['link_name'] = $value[1];
+			$row_array['link_published'] = $value[2];
+			$row_array['address'] = $value[3];
+			$row_array['city'] = $value[4];
+			$row_array['state'] = $value[5];
+			$row_array['country'] = $value[6];
+			$row_array['postcode'] = $value[7];
+			$row_array['telephone'] = $value[8];
+			$row_array['fax'] = $value[9];
+			$row_array['email'] = $value[10];
+			$row_array['website'] = $value[11];
+			$row_array['lat'] = $value[12];
+			$row_array['lng'] = $value[13];
+			$row_array['link_rating'] = $value[14];
+		
+			array_push($return_arr, $row_array);
+		} 
+		header('Content-Type: application/json');
+		echo json_encode($return_arr);
+		jexit();
+	}
 
 }
