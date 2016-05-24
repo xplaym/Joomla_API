@@ -409,7 +409,7 @@ class hoicoiapiController extends JControllerLegacy {
 		
 		$id = JRequest::getInt('id',1);
 		$return_arr = array();
-		$query = "SELECT link_id,link_name,link_published,address,city,state,country,postcode,telephone,fax,email,website,lat,lng,link_rating FROM `#__mt_links` WHERE lat is not null and lat != '255.000000' and link_published = '1'";
+		$query = "SELECT link_id,link_name,link_published,address,city,state,country,postcode,telephone,fax,email,website,lat,lng,link_rating FROM `#__mt_links` WHERE link_published = '1'";
 
 		$db = JFactory::getDBO(); 
 		$db->setQuery($query);
